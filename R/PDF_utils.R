@@ -2,6 +2,8 @@
 ### PDF html extraction functions
 #################################
 
+require('stringr')
+
 # evaluate whether the URL is available
 is.URLconnectable <- function(theURL) {
   aConnection <- suppressWarnings(try(url(theURL,
@@ -23,7 +25,8 @@ getHTMLfromURL <- function(theURL) {
   )
 
   # scrub unlikely url-containing rows with short HTML strings
-  theHTMLvector <- theHTMLvector[nchar(theHTMLvector) > 25]
+  # theHTMLvector <- theHTMLvector[nchar(theHTMLvector) > 25]
+  theHTMLvector <- theHTMLvector[stringr::str_length(theHTMLvector) > 25]
   return(theHTMLvector)
 }
 
